@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Webex Calling CRM Connector Sample Welcome</title>
+    <title>Webex CRM sample User Connect</title>
+    <!--Cisco Design:-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cui-standard.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/Logo_small_blue.png')}}">
+    <!--CHOOSE END-->
+    <!-- <link href="http://www.cisco.com/web/fw/cisco-ui/2.0.5/dist/css/cui-standard.min.css" rel="stylesheet" type="text/css">  -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/customStyles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"
+        integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0=" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/styleguide.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/loader.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/selects.js') }}"></script>
+</head>
+
+<header class="header">
+    <div class="container">
+        <div class="header-panels">
+            <div class="header-panel">
+                <a class="header__logo" href="http://www.cisco.com" target="_blank">
+                    <span class="icon-cisco"></span>
+                </a>
+                <div class="header__title">Webex Calling CRM Connect Sample</div>
+            </div>
+            <div class="header-panel header-panel--right">
+            </div>
+        </div>
+    </div>
+</header>
+
+<body class="cui">
+    <div class="row dbl-margin-top dbl-padding-top">
+        
+        <!--left rail-->
+        <div class="col-md-2">
+        </div>
+
+        <!-- Middle Rail -->
+        <div class="col-8">
+            <div class="panel panel--loose panel--raised base-margin-bottom">
+
+                <div class="form-group base-margin-left">
+                    <div class="form-group__text">
+                        <p>
+                        You are about to login to connect your Webex Calling account with your organization's CRM.
+                        <br>
+                        If you agree to having the CallerID of incoming calls to your extension be examined by your
+                        company's CRM system
+                        <br>
+                        to be able to display caller information on your CRM interface
+                        as a call rings, click on the Login button below.
+                    </p>
+                    </div>
+
+                    <button onclick="location.href = '/login?crmbase={{crmbase}}&crmargs={{crmargs}}';"
+                        class="btn btn--primary">Login</button>
+                </div>
+            </div>
+        </div>
+
+        <!--Right rail-->
+        <div class="col-md-2">
+        </div>
+
+    </div>
+</body>
+
+</html>

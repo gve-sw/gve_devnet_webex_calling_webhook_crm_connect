@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html id="styleguide" class="" lang="en">
+<!--
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
+    integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
+    crossorigin="anonymous"></script> -->
+<script src="{{ url_for('static', filename='js/socket.io.js') }}"></script>
+<script type="text/javascript" charset="utf-8">
+    var socket = io();
+    socket.on('connect', function () {
+        socket.emit('my event', { data: 'I\'m connected!' });
+    });
+    socket.on('message', function (msg) {
+        console.log(msg);
+        document.getElementById("message").innerHTML = msg;
+        document.getElementById("message_container").style.display = "block";
+    });
+</script>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Webex CRM sample User Connect</title>
+    <!--Cisco Design:-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cui-standard.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/Logo_small_blue.png')}}">
+    <!--CHOOSE END-->
+    <!-- <link href="http://www.cisco.com/web/fw/cisco-ui/2.0.5/dist/css/cui-standard.min.css" rel="stylesheet" type="text/css">  -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/customStyles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"
+        integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0=" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/styleguide.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/loader.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/selects.js') }}"></script>
+
+
+
+</head>
+
+<body class="cui">
+
+    <header class="header">
+        <div class="container">
+            <div class="header-panels">
+                <div class="header-panel">
+                    <a class="header__logo" href="http://www.cisco.com" target="_blank">
+                        <span class="icon-cisco"></span>
+                    </a>
+                    <div class="header__title">Webex Calling CRM Connect Sample</div>
+                </div>
+                <div class="header-panel header-panel--right">
+                    <span class="header-item">Logged in as: {{name}}</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="row  dbl-margin-top dbl-padding-top">
+        
+        <!--left rail-->
+        <div class="col-md-2">
+        </div>
+
+        <!-- Middle Rail -->
+        <div class="col-8">
+
+            <div class="section">
+
+                <!--message output-->
+                <div class="row">
+                    <div id="message_container" class="base-margin-bottom" style="display: none; padding: 11px; width:100%;">
+                        <div class="alert">
+                            <div id="message" class="alert__message">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--First panel-->
+                <div class="panel panel--loose panel--raised base-margin-bottom">
+
+                    <div class="form-group dbl-margin ">
+                        <div class="form-group__text">
+                            <button onclick="doAction()" id="actionbutton"
+                                class="btn btn--success text-white text-weight-900" style="border: 0;">Activate CRM Connection</button>
+                        </div>
+                    </div>
+   
+                    <ul class="accordion">
+                        <li class="active">
+                            <a class="accordion__title" href="javascript:;">
+                                <span style="font-weight:bold;">CRM Connections Settings</span>
+                                <span class="accordion__toggle icon-chevron-down"></span>
+                            </a>
+                            <div class="accordion__content">
+
+                                <div class="form-group base-margin-bottom">
+                                    <div class="form-group__text">
+                                        <input id="baseURL" type="text" onkeyup="updateTestCRMURL();">
+                                        <label for="baseURL">Base URL to send Call Event:</label>
+                                    </div>
+                                    <div class="help-block" role="alert">
+                                        <span>The Web Server Location without Arguments e.g. https://my.crm.com</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group base-margin-bottom">
+                                    <span tabindex="0" class="label label--bordered"
+                                        style="border: none; position: absolute;right: 0;font-size: 18px;margin-top: 24px;margin-right: 15px;z-index:1000;"
+                                        data-balloon="Supported Variables for Arguments&#10;%T National format phone number. Example: (909) 555-1212&#10;%I International format phone number. Example: +1 909 555 1212&#10;%E E164 formatted number. Example: +19095551212&#10;%N Name of the caller. Example: John Doe&#10;"
+                                        data-balloon-pos="up" data-balloon-break data-balloon-length="xlarge">
+                                        <span class="icon-help-outline">
+                                        </span>
+                                    </span>
+
+                                    <div class="form-group__text">
+                                        <input id="URLargs" type="text" onkeyup="updateTestCRMURL();">
+                                        <label for="URLargs">Arguments to add to Base URL:</label>
+                                    </div>
+                                    <div class="help-block" role="alert">
+                                        <span>e.g. calleridnumber=%E,calleridname=%N</span>
+                                    </div>
+                                </div>
+                                <div class="base-margin-bottom">
+                                    <div class="alert">
+                                        <div class="alert__icon icon-info-outline"></div>
+                                        <div class="alert__message">The above URL and arguments are used to invoke the
+                                            CRM in a
+                                            separate browser tab/window upon detecting call coming into your number
+                                            {{phonenumber}}:</div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <!--second panel-->
+                <div class="panel panel--loose panel--raised base-margin-bottom">
+                    <ul class="accordion">
+                        <li class="">
+                            <a class="accordion__title" href="javascript:;">
+                                <span style="font-weight:bold;">CRM Connection Test</span>
+                                <span class="accordion__toggle icon-chevron-down"></span>
+                            </a>
+                            <div class="accordion__content">
+
+                                <div class="form-group base-margin-bottom">
+                                    <div class="form-group__text">
+                                        <input id="testNumber" type="text" onkeyup="updateTestCRMURL();">
+                                        <label for="testNumber">Test incoming number (in E164 format):</label>
+                                    </div>
+                                    <!--<div class="help-block" role="alert">
+                                        <span>Hint for field</span>
+                                    </div>-->
+                                </div>
+
+                                <div class="form-group base-margin-bottom">
+                                    <div class="form-group__text">
+                                        <input id="testName" type="text" onkeyup="updateTestCRMURL();">
+                                        <label for="testName">Test incoming name:</label>
+                                    </div>
+                                    <!--<div class="help-block" role="alert">
+                                    <span>Hint for field</span>
+                                </div>-->
+                                </div>
+                                
+                                <div class="form-group base-margin-bottom">
+                                    <div class="form-group__text">
+                                        <textarea id="test-url" rows="1" readonly=""></textarea>
+                                        <label for="test-url">Current URL to invoke CRM:</label>
+
+                                    </div>
+                                </div>
+                                <button class="btn btn--primary" onclick="doTest()">Test CRM Connection</button>
+                            </div>
+
+                </div>
+                </li>
+                </ul>
+
+            </div>
+            <script src="https://unpkg.com/libphonenumber-js@^1.7.6/bundle/libphonenumber-min.js"></script>
+            <script>
+
+                function updateFinalCRMURL(caller_number, caller_name) {
+
+                    const theBase = document.getElementById('baseURL').value;
+                    const theArgs = document.getElementById('URLargs').value;
+                    const theNumber = caller_number;
+                    const theName = caller_name
+                    //calleridnumber=%E,calleridname=%N
+                    var theFinalURL = theBase + '?' + theArgs.replace(/,/g, "&")
+                    theFinalURL = theFinalURL.replace(/%%/g, "%");
+                    theFinalURL = theFinalURL.replace(/%N/g, theName);
+                    if (theNumber != "") {
+                        phoneNumber = libphonenumber.parsePhoneNumber(theNumber)
+                        theFinalURL = theFinalURL.replace(/%T/g, phoneNumber.formatNational());
+                        theFinalURL = theFinalURL.replace(/%I/g, phoneNumber.formatInternational());
+                        theFinalURL = theFinalURL.replace(/%E/g, theNumber);
+                    }
+                    theFinalURL = theFinalURL.replaceAll("+", "%2B");
+                    return theFinalURL;
+                }
+
+                function updateTestCRMURL() {
+                    // this function is called every time a change is detected in the CRMURL Base, CRM Args , test name or test number fields
+                    // to keep the final test URL to send to the CRM updated and shown in the page
+                    const theTestNumber = document.getElementById('testNumber').value;
+                    const theTestName = document.getElementById('testName').value;
+                    document.getElementById('test-url').value = updateFinalCRMURL(theTestNumber, theTestName)
+                }
+
+                function doTest() {
+
+                    const theTestURL = document.getElementById('test-url').value
+                    window.open(
+                        theTestURL, "_blank");
+
+                }
+
+                function setActionButton() {
+                    if (isConnected == "True") {
+                        document.getElementById('actionbutton').innerHTML = "Deactivate CRM Connection";
+                        document.getElementById('actionbutton').style.background = "rgba(201, 10, 1, 1)";
+                    } else {
+                        document.getElementById('actionbutton').innerHTML = "Activate CRM Connection";
+                        document.getElementById('actionbutton').style.background = "rgba(104, 189, 73, 1)";
+                    }
+                }
+
+                var isConnected = "{{connected}}";
+
+                setActionButton();
+
+                document.getElementById('baseURL').value = "{{crmbase}}";
+                document.getElementById('URLargs').value = "{{crmargs}}";
+
+        // temporary assignment of testURL, should dynamically build as they fill out the name and number
+        //document.getElementById('test-url').value ="http://0.0.0.0:5000/crmtest?calleridnumber=+19095551212&calleridname=JohnDoe"
+            </script>
+
+            <!--Third panel-->
+            <div class="panel panel--loose panel--raised base-margin-bottom">
+                <ul class="accordion">
+                    <li class="">
+                        <a class="accordion__title" href="javascript:;">
+                            <span style="font-weight:bold;">Call log (Messages from Server):</span>
+                            <span class="accordion__toggle icon-chevron-down"></span>
+                        </a>
+                        <div class="accordion__content">
+
+                            <div class="responsive-table">
+                                <table id="log_table" class="table table--lined" aria-label="call logs table">
+                                    <thead>
+                                        <tr>
+                                            <th>Timestamp</th>
+                                            <th>Received Number</th>
+                                            <th>Received Name</th>
+                                            <th>URL Called</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+
+<!--
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
+                integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
+                crossorigin="anonymous"></script>  -->
+
+            <script type="text/javascript" charset="utf-8">
+                var socket = io();
+                socket.on('connect', function () {
+                    socket.emit('message', 'I\'m connected!');
+                });
+                socket.on('message', function (msg) {
+                    console.log(msg);
+                    document.getElementById("message").innerHTML = msg;
+                    document.getElementById("message_container").style.display = "block";
+
+                    let commandArray = msg.split(",");
+
+                    // below check if a call offering message was received to pop up the CRM!
+                    console.log("The command is: ", commandArray[0]);
+                    if (commandArray[0] == "calloffering") {
+                        var rNumber = commandArray[1];
+                        var rName = commandArray[2];
+                        var theFinalCRMURL = updateFinalCRMURL(rNumber, rName);
+                        console.log("The Final CRM URL is: ", theFinalCRMURL);
+                        if (theFinalCRMURL != "") {
+                            console.log("Attempting to open the CRM in a separate tab...");
+                            window.open(theFinalCRMURL, "_blank");
+                            let tableRef = document.getElementById("log_table");
+                            // Insert a row at the end of the table
+                            let newRow = tableRef.insertRow(-1);
+                              // Insert a cell in the row at index 0
+                            let newCell = newRow.insertCell(0);
+                            // calculate current date and time
+
+                            var currentdatetime=new Date().toLocaleString().replace(',','')
+
+                            // Append a text node to the cell
+                            let newText = document.createTextNode(currentdatetime);
+                            newCell.appendChild(newText);
+                            // add number column
+                            newCell = newRow.insertCell(1);
+                            newText = document.createTextNode(rNumber);
+                            newCell.appendChild(newText);
+                            // add name column
+                            newCell = newRow.insertCell(2);
+                            newText = document.createTextNode(rName);
+                            newCell.appendChild(newText);
+                            // add URL column
+                            newCell = newRow.insertCell(3);
+                            newText = document.createTextNode(theFinalCRMURL);
+                            newCell.appendChild(newText);                        }
+
+                    }
+
+                });
+
+                function doAction() {
+
+                    const theAction = (isConnected == "True") ? 'disconnect' : 'connect';
+
+                    socket.emit('message', theAction);
+
+                    //toggle the status once they hit the connection button
+                    isConnected = (isConnected == "True") ? 'False' : 'True';
+                    setActionButton();
+
+                }
+            </script>
+            <!--Alert for error message-->
+            <!--PASS INFO: Pass the following information to the template: error=True/False ; errormessage="xxx" ; errorcode=xxx-->
+            {% include "alert.html" %}
+
+        </div>
+
+        <!--Right rail-->
+        <div class="col-md-2">
+        </div>
+
+    </div>
+
+</body>
+</html>

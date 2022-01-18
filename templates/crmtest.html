@@ -1,0 +1,87 @@
+<!-- Template page: This settings page offers various input field to gather settings information -->
+
+<!doctype html>
+<html id="styleguide" class="" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Webex Calling CRM Connect Sample test CRM</title>
+
+
+    <!--Cisco Design:-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cui-standard.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/Logo_small_blue.png')}}">
+    <!--CHOOSE END-->
+
+    <!--script link for Charts.js library-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/customStyles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"
+        integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0=" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/styleguide.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/loader.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/selects.js') }}"></script>
+</head>
+
+<body class="cui">
+
+    <header class="header">
+        <div class="container">
+            <div class="header-panels">
+                <div class="header-panel">
+                    <a class="header__logo" href="http://www.cisco.com" target="_blank">
+                        <span class="icon-cisco"></span>
+                    </a>
+                    <div class="header__title">Webex Calling CRM Connect Sample</div>
+                </div>
+                <div class="header-panel header-panel--right">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="row dbl-margin-top dbl-padding-top">
+
+        <!--left rail-->
+        <div class="col-md-2">
+        </div>
+
+        <!-- Middle Rail -->
+        <div class="col-8">
+            <div class="section">
+                <div class="panel panel--loose panel--raised base-margin-bottom">
+                    <h2 class="subtitle">Mock CRM page for testing</h2>
+                    <hr>
+
+                    <div class="section">
+
+                        <!--CUSTOMIZE: Text field section: Add or remove elements as needed.-->
+                        CRM params received:
+                        <br>
+                        <b> CallerID number: </b>{{number}}
+                        <br>
+                        <b> CallerID Name: </b>{{name}}
+
+                    </div>
+
+
+
+
+                </div>
+            </div>
+
+            <!-- Right Rail -->
+            <div class="col-md-2">
+            </div>
+
+        </div>
+
+</body>
+
+</html>
