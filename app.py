@@ -47,7 +47,7 @@ load_dotenv()
 
 AUTHORIZATION_BASE_URL = 'https://api.ciscospark.com/v1/authorize'
 TOKEN_URL = 'https://api.ciscospark.com/v1/access_token'
-SCOPE = ['spark:all','spark:calls_read','spark:calls_write']
+SCOPE = ['spark:people_read','spark:calls_read','spark:calls_write']
 
 
 AUTH_BASE_ADDRESS=os.getenv('AUTH_BASE_ADDRESS')

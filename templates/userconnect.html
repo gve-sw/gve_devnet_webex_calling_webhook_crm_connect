@@ -110,7 +110,7 @@
                                 <div class="form-group base-margin-bottom">
                                     <span tabindex="0" class="label label--bordered"
                                         style="border: none; position: absolute;right: 0;font-size: 18px;margin-top: 24px;margin-right: 15px;z-index:1000;"
-                                        data-balloon="Supported Variables for Arguments&#10;%T National format phone number. Example: (909) 555-1212&#10;%I International format phone number. Example: +1 909 555 1212&#10;%E E164 formatted number. Example: +19095551212&#10;%N Name of the caller. Example: John Doe&#10;"
+                                        data-balloon="Supported Variables for Arguments&#10;%T National format phone number. Example: (909) 555-1212&#10;%I International format phone number. Example: +1 909 555 1212&#10;%E E164 formatted number. Example: +19095551212&#10;%P Plain national number. Example: 9095551212&#10;%N Name of the caller. Example: John Doe&#10;"
                                         data-balloon-pos="up" data-balloon-break data-balloon-length="xlarge">
                                         <span class="icon-help-outline">
                                         </span>
@@ -203,6 +203,7 @@
                         theFinalURL = theFinalURL.replace(/%T/g, phoneNumber.formatNational());
                         theFinalURL = theFinalURL.replace(/%I/g, phoneNumber.formatInternational());
                         theFinalURL = theFinalURL.replace(/%E/g, theNumber);
+                        theFinalURL = theFinalURL.replace(/%P/g, phoneNumber.nationalNumber);
                     }
                     theFinalURL = theFinalURL.replaceAll("+", "%2B");
                     return theFinalURL;

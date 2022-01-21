@@ -8,8 +8,9 @@ Sample handling of Webex Calling webhooks to integrate with cloud based CRM by p
 * Gerardo Chaves (gchaves@cisco.com)
 
 ## Solution Components
-*  Webex Calling
-*  Webex REST API
+* Webex Calling
+* Webex REST API
+* Webex Control Hub  
 
 
 ## Coding Guides used for oAuth implementation
@@ -37,7 +38,7 @@ https://stackoverflow.com/questions/27771324/google-api-getting-credentials-from
   - For the initial testing, you can set the Redirect URL to: http://0.0.0.0:5000/callback or to whatever matches what you inted to use below for the **AUTH_BASE_ADDRESS** parameter  plus '/callback'  
   - Once you want to test the code that actually receives the call events and pops up the CRM, you will need to edit this field to put the external
   facing URL base posfixed by /callback. (i.e. https://78b3-179-50-245-41.ngrok.io/callback)  
-    - IMPORTANT: Select the following scopes for the integration 'spark:all','spark:calls_read','spark:calls_write'  
+    - IMPORTANT: Select the following scopes for the integration 'spark:people_read','spark:calls_read','spark:calls_write'  
     - Before closing the window, take note of the Client ID and Client Secret fields, you will need them below and you cannot retrieve the Client Secret later! (you can always re-generate it)  
 
 - Once you clone the repository, edit the .env file to fill out the following configuration variables:  
@@ -102,8 +103,16 @@ Upon successful login, they will be presented with the main User Connect page wh
 
 ![connected](./IMAGES/connected_initial.png)  
   
-If the cmrbase and/or crmargs arguments have not been passed into the login page, the user can fill them out. Instructions are shown by hovering 
-above the info button:  
+If the cmrbase and/or crmargs arguments have not been passed into the login page, the user can fill them out.  
+
+Supported variables for arguments are:  
+%T National format phone number. Example: (909) 555-1212  
+%I International format phone number. Example: +1 909 555 1212  
+%E E164 formatted number. Example: +19095551212  
+%P Plain national number. Example: 9095551212  
+%N Name of the caller. Example: John Doe  
+
+These instructions are also shown by hovering above the info button:  
 
 ![connected help](./IMAGES/connected_config_help_text.png)   
 
@@ -128,6 +137,26 @@ And a browser pop-up window will come up with the CRM of choice and, if the righ
 with the caller ID.   
 
 When they would like to stop receiving screen-pops, they can either close the window or hit the red "Deactivate CRM Connection" button.  
+  
+If you wish to have the CRM Connect URL available to all users in the organization in their Webex App, you can create a Webex App Shortcut in 
+contro hub:  
+  
+![AppHubShortcuts](./IMAGES/AppHubShortcuts.png)  
+  
+Click on the "Add Shortcut" button and then put the full URL that points to where you are running this sample 
+with the correct parameters in the URL Field. Example:   
+```
+http://0.0.0.0:5000/login?crmbase=http://0.0.0.0:5000/crmtest&crmargs="calleridnumber=%E,calleridname=%N"
+```
+  
+![add_shortcut](./IMAGES/AddShortcut.png)  
+  
+Once you save it , everytime a user logs into their Webex App they will be able to click on that shortcut on the lower left portion of the app and 
+an embedded web browser window will appear in the Webex App where they can log in and enable/disable/test the integration.  
+
+NOTE: Currently, the integration triggers a popup on a separate tab or window (depending on how you have configured the users browser) 
+so make sure the browser is not blocking popups. Same goes for the Webex App, a separate simpel browser window pops up in front of the webex app 
+with the contents of the page that is served from the configured URL; in this case it will be the CRM Connect User Connect page as pictured above.  
 
 
 
