@@ -41,7 +41,7 @@ https://stackoverflow.com/questions/27771324/google-api-getting-credentials-from
     - IMPORTANT: Select the following scopes for the integration 'spark:people_read','spark:calls_read','spark:calls_write'  
     - Before closing the window, take note of the Client ID and Client Secret fields, you will need them below and you cannot retrieve the Client Secret later! (you can always re-generate it)  
 
-- Once you clone the repository, edit the .env file to fill out the following configuration variables:  
+- Once you clone the repository, edit the `.env` file to fill out the following configuration variables:  
 
 **CLIENT_ID**     
 Set this variable to the Client ID from your integration. See the [Webex Integrations](https://developer.webex.com/docs/integrations) documentation for more details.  
@@ -60,6 +60,31 @@ the browser being used by the end user can reach. In production, the AUTH_BASE_A
 Set the WEBHOOK_ADDRESS to external facing URL where your instance of this Flask application will run. The code will then append /callevent to this
  address and use that to configure the Webhook that the Webex Calling cloud uses to notify this application of new call events.  
 NOTE: This URL does have to map to a public IP address out on the internet for the Webex Calling cloud to be able to call it.   
+
+## Optional: build a container image using Docker
+
+This repository contains a `Dockerfile` which you can use to build a container image to run the sample code from.  
+
+To be able to configure the sample code with the correct environment variables described above, edit  `Dockerfile` and 
+uncomment/comment the lines that define the FLASK_ENV variable depending on which environment you wish to target when building the 
+image (production or development)  
+  
+Also, uncomment/comment the corresponding line (29 or 30) to ADD either `.env_local` or `.env_prod` into the container as the `.env` file depending 
+if you wish to build a production or development container.  
+NOTE: Don't forget to edit either the `.env_local` or `.env_prod` file as needed above to specify the values for the 
+**CLIENT_ID**, **CLIENT_SECRET**, **AUTH_BASE_ADDRESS** and **WEBHOOK_ADDRESS**  environment variables before building the Docker container 
+image. If you just fill them out in the `.env` file they will not be copied over since  that is only for testing locally and without building a container.  
+
+```shell script
+# To build image using docker (using 'crmconnector' as image name but you can select another name)
+docker build . -t crmconnector
+
+# To run dockerized application locally (using 'crmconnector-app' as image label but you can select another name)
+docker run --rm --name crmconnector-app -p 5000:5000 crmconnector
+
+# To push/pull the image from remote repository
+docker pull/push crmconnector
+```
 
 
 ## Usage

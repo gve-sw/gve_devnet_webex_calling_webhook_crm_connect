@@ -282,4 +282,4 @@ if __name__ == '__main__':
     print("Using AUTH_BASE_ADDRESS: ",AUTH_BASE_ADDRESS)
     print("Using redirect URI: ",REDIRECT_URI)
     #app.run(host='0.0.0.0', port=5000, debug=True)
-    socketio.run(app,host='0.0.0.0', port=5000, debug=True)
+    socketio.run(app,host='0.0.0.0', port=5000)
