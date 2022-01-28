@@ -144,7 +144,7 @@ def callevent():
     request_headers=request.headers
     #print("Request headers: ",request_headers)
     #print("Request data: ", request_data)
-    #Request data:  {'id': 'Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1dFQkhPT0svYWQxZDI5NTAtYWQ2OS00ZDIzLThlOTMtNjJiOGMzMDJiYTg0', 'name': 'WbxCallCRM', 'targetUrl': 'https://df63-179-50-245-41.ngrok.io/callevent', 'resource': 'telephony_calls', 'event': 'created', 'orgId': 'Y2lzY29zcGFyazovL3VzL09SR0FOSVpBVElPTi85YjVjYmJmNi1mOWJjLTQyZWYtYTIwYy0xNDAyOGIyNTM3MmI', 'createdBy': 'Y2lzY29zcGFyazovL3VzL1BFT1BMRS8xNzM3NDg2Ny0xYmUyLTQwODAtYTIzOC0yYjU2ZDg5MGExYzk', 'appId': 'Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MwMDU4YmVjNjQyOWRjZWFjYTUxMDU3ZDQ3OGJlYjJmZTNmZDUxZmNiZjIyNjg2NmNiMWI4NWVlZGU1Mzc0NzZl', 'ownedBy': 'creator', 'status': 'active', 'created': '2021-12-09T00:15:15.491Z', 'actorId': 'Y2lzY29zcGFyazovL3VzL1BFT1BMRS8xNzM3NDg2Ny0xYmUyLTQwODAtYTIzOC0yYjU2ZDg5MGExYzk', 'data': {'eventType': 'received', 'eventTimestamp': '2021-12-09T00:20:58.929Z', 'callId': 'Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL0NBTEwvY2FsbGhhbGYtMzM3MjE3MDA5OjA', 'callSessionId': 'ZDRiNDA4ODctOWY5OS00M2Y0LWI1NWUtYmFkMjJmMTdhMmNj', 'personality': 'terminator', 'state': 'alerting', 'remoteParty': {'name': '+50622013643', 'number': '+50622013643', 'privacyEnabled': False, 'callType': 'external'}, 'appearance': 1, 'created': '2021-12-09T00:20:58.928Z'}}
+
     if 'state' in request_data['data'] and request_data['data']['state']=='alerting':
         callerName=request_data['data']['remoteParty']['name']
         callerNumber=request_data['data']['remoteParty']['number']
