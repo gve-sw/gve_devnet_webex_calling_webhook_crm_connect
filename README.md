@@ -1,7 +1,17 @@
 # GVE Devnet Webex Calling Webhook CRM Connect  
 
-Sample handling of Webex Calling webhooks to integrate with cloud based CRM by passing to it new call arrival events. 
+Sample code that implements a web service that allows Webex Calling users to log in and keep a web page open which 
+launches separate screen-pop pages into a Customer Relationship Manager (CRM) type web application every time a call is received. 
+Because the code that triggers the screen-pop passes along configurable parameters that contain the incoming callerID information, the CRM page displayed should match 
+the record for the customer calling in. 
+  
+This sample then demonstrates the use of Webex integrations with an example of an oAuth flows and proper management 
+of scopes to only request from the end user of Webex Calling the permissions necessary to receive incoming call events 
+and obtain the display name and number of the person being called as well.  It also demonstrates the proper registering and 
+handling of Webex webhooks 
 
+Also included are instructions on how Webex Control Hub administrators can configure the URL of the sample web service once it is hosted on an external 
+web server as a Webex App "shortcut" for many users at once. 
 
 ## Contacts
 
